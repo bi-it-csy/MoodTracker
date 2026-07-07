@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace experiment1
+namespace prototype1
 {
     [Application]
     public class MainApplication : MauiApplication
@@ -14,3 +14,4 @@ namespace experiment1
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }
+

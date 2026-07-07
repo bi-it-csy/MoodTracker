@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace experiment1
+namespace prototype1
 {
     public static class MauiProgram
     {
@@ -23,3 +23,4 @@ namespace experiment1
         }
     }
 }
+

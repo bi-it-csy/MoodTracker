@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="experiment1.AppShell"
+    x:Class="prototype1.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:experiment1"
+    xmlns:local="clr-namespace:prototype1"
     Title="MoodTracker">
 
     <ShellContent
@@ -12,3 +12,4 @@
         Route="MainPage" />
 
 </Shell>
+

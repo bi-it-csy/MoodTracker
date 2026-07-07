@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace experiment1
+namespace prototype1
 {
     public class Program
     {
@@ -14,3 +14,4 @@ namespace experiment1
         }
     }
 }
+

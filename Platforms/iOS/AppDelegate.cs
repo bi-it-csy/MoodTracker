@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace experiment1
+namespace prototype1
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate
@@ -8,3 +8,4 @@ namespace experiment1
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }
+

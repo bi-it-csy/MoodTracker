@@ -1,7 +1,7 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace experiment1
+namespace prototype1
 {
     public partial class MainPage : ContentPage
     {
@@ -32,7 +32,7 @@ namespace experiment1
             {
                 selectedMood = mood;
                 UpdateMoodButtons();
-                StatusLabel.Text = $"Stimmung ausgewählt: {mood}";
+                StatusLabel.Text = $"Stimmung ausgewÃ¤hlt: {mood}";
             }
         }
 
@@ -40,13 +40,13 @@ namespace experiment1
         {
             if (CoursePicker.SelectedItem is not string course)
             {
-                await DisplayAlertAsync("Angebot fehlt", "Bitte wähle zuerst ein Angebot aus.", "OK");
+                await DisplayAlertAsync("Angebot fehlt", "Bitte wÃ¤hle zuerst ein Angebot aus.", "OK");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(selectedMood))
             {
-                await DisplayAlertAsync("Stimmung fehlt", "Bitte wähle deine Stimmung aus.", "OK");
+                await DisplayAlertAsync("Stimmung fehlt", "Bitte wÃ¤hle deine Stimmung aus.", "OK");
                 return;
             }
 
@@ -63,28 +63,28 @@ namespace experiment1
             ResetForm();
             UpdateEntryCount();
 
-            StatusLabel.Text = "Eintrag gespeichert. Danke für dein Feedback!";
+            StatusLabel.Text = "Eintrag gespeichert. Danke fÃ¼r dein Feedback!";
             SemanticScreenReader.Announce(StatusLabel.Text);
         }
 
         private void OnResetFormClicked(object? sender, EventArgs e)
         {
             ResetForm();
-            StatusLabel.Text = "Formular zurückgesetzt.";
+            StatusLabel.Text = "Formular zurÃ¼ckgesetzt.";
         }
 
         private async void OnClearHistoryClicked(object? sender, EventArgs e)
         {
             if (MoodEntries.Count == 0)
             {
-                StatusLabel.Text = "Es gibt noch keinen Verlauf zum Löschen.";
+                StatusLabel.Text = "Es gibt noch keinen Verlauf zum LÃ¶schen.";
                 return;
             }
 
             var shouldClear = await DisplayAlertAsync(
-                "Verlauf löschen",
-                "Möchtest du alle bisherigen Stimmungseinträge löschen?",
-                "Löschen",
+                "Verlauf lÃ¶schen",
+                "MÃ¶chtest du alle bisherigen StimmungseintrÃ¤ge lÃ¶schen?",
+                "LÃ¶schen",
                 "Abbrechen");
 
             if (!shouldClear)
@@ -95,7 +95,7 @@ namespace experiment1
             MoodEntries.Clear();
             Preferences.Remove(StorageKey);
             UpdateEntryCount();
-            StatusLabel.Text = "Verlauf gelöscht.";
+            StatusLabel.Text = "Verlauf gelÃ¶scht.";
         }
 
         private void ResetForm()
@@ -172,16 +172,17 @@ namespace experiment1
 
         public string MoodIcon => Mood switch
         {
-            "Gut" => "😊",
-            "Neutral" => "😐",
-            "Schlecht" => "🙁",
-            _ => "•"
+            "Gut" => "ðŸ˜Š",
+            "Neutral" => "ðŸ˜",
+            "Schlecht" => "ðŸ™",
+            _ => "â€¢"
         };
 
-        public string CreatedAtText => $"{CreatedAt:dd.MM.yyyy HH:mm} · {Mood}";
+        public string CreatedAtText => $"{CreatedAt:dd.MM.yyyy HH:mm} Â· {Mood}";
 
         public string NotePreview => string.IsNullOrWhiteSpace(Note)
             ? "Keine Notiz erfasst."
             : Note;
     }
 }
+
