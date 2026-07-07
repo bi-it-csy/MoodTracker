@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="prototype1.MainPage"
@@ -44,7 +44,7 @@
                            FontSize="20"
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}" />
-                    <Label Text="WÃ¤hle ein Angebot, markiere deine Stimmung und schreibe optional eine kurze Notiz."
+                    <Label Text="W&#xE4;hle ein Angebot, markiere deine Stimmung und schreibe optional eine kurze Notiz."
                            FontSize="14"
                            LineBreakMode="WordWrap"
                            TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
@@ -72,7 +72,7 @@
                                 <RoundRectangle CornerRadius="8" />
                             </Border.StrokeShape>
                             <Picker x:Name="CoursePicker"
-                                    Title="Angebot auswÃ¤hlen">
+                                    Title="Angebot ausw&#xE4;hlen">
                                 <Picker.Items>
                                     <x:String>Sportkurs</x:String>
                                     <x:String>Tanzkurs</x:String>
@@ -92,17 +92,17 @@
                         <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
                             <Button x:Name="GoodMoodButton"
                                     Grid.Column="0"
-                                    Text="ðŸ˜Š Gut"
+                                    Text="&#x1F60A; Gut"
                                     Clicked="OnMoodClicked"
                                     CommandParameter="Gut" />
                             <Button x:Name="NeutralMoodButton"
                                     Grid.Column="1"
-                                    Text="ðŸ˜ Neutral"
+                                    Text="&#x1F610; Neutral"
                                     Clicked="OnMoodClicked"
                                     CommandParameter="Neutral" />
                             <Button x:Name="BadMoodButton"
                                     Grid.Column="2"
-                                    Text="ðŸ™ Schlecht"
+                                    Text="&#x1F641; Schlecht"
                                     Clicked="OnMoodClicked"
                                     CommandParameter="Schlecht" />
                         </Grid>
@@ -136,14 +136,14 @@
                                 TextColor="White"
                                 Clicked="OnSaveClicked" />
                         <Button Grid.Column="1"
-                                Text="ZurÃ¼cksetzen"
+                                Text="Zur&#xFC;cksetzen"
                                 BackgroundColor="{AppThemeBinding Light=#E8EEF0, Dark=#334047}"
                                 TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}"
                                 Clicked="OnResetFormClicked" />
                     </Grid>
 
                     <Label x:Name="StatusLabel"
-                           Text="Bereit fÃ¼r deinen ersten Eintrag."
+                           Text="Bereit f&#xFC;r deinen ersten Eintrag."
                            FontSize="13"
                            TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
                 </VerticalStackLayout>
@@ -151,7 +151,7 @@
 
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" Margin="0,4,0,0">
                 <VerticalStackLayout Grid.Column="0" Spacing="2">
-                    <Label Text="Bisherige EintrÃ¤ge"
+                    <Label Text="Bisherige Eintr&#xE4;ge"
                            FontSize="21"
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}" />
@@ -161,7 +161,7 @@
                 </VerticalStackLayout>
 
                 <Button Grid.Column="1"
-                        Text="Verlauf lÃ¶schen"
+                        Text="Verlauf l&#xF6;schen"
                         FontSize="13"
                         BackgroundColor="{AppThemeBinding Light=#F5E8E5, Dark=#442C2A}"
                         TextColor="{AppThemeBinding Light=#9B3F35, Dark=#F1B5AD}"
@@ -178,7 +178,7 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="8" />
                         </Border.StrokeShape>
-                        <Label Text="Noch keine EintrÃ¤ge vorhanden."
+                        <Label Text="Noch keine Eintr&#xE4;ge vorhanden."
                                FontSize="14"
                                HorizontalTextAlignment="Center"
                                TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
@@ -223,4 +223,3 @@
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
-

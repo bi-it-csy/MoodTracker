@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Text.Json;
 
 namespace prototype1
@@ -32,7 +32,7 @@ namespace prototype1
             {
                 selectedMood = mood;
                 UpdateMoodButtons();
-                StatusLabel.Text = $"Stimmung ausgewÃ¤hlt: {mood}";
+                StatusLabel.Text = $"Stimmung ausgew\u00e4hlt: {mood}";
             }
         }
 
@@ -40,13 +40,13 @@ namespace prototype1
         {
             if (CoursePicker.SelectedItem is not string course)
             {
-                await DisplayAlertAsync("Angebot fehlt", "Bitte wÃ¤hle zuerst ein Angebot aus.", "OK");
+                await DisplayAlertAsync("Angebot fehlt", "Bitte w\u00e4hle zuerst ein Angebot aus.", "OK");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(selectedMood))
             {
-                await DisplayAlertAsync("Stimmung fehlt", "Bitte wÃ¤hle deine Stimmung aus.", "OK");
+                await DisplayAlertAsync("Stimmung fehlt", "Bitte w\u00e4hle deine Stimmung aus.", "OK");
                 return;
             }
 
@@ -63,28 +63,28 @@ namespace prototype1
             ResetForm();
             UpdateEntryCount();
 
-            StatusLabel.Text = "Eintrag gespeichert. Danke fÃ¼r dein Feedback!";
+            StatusLabel.Text = "Eintrag gespeichert. Danke f\u00fcr dein Feedback!";
             SemanticScreenReader.Announce(StatusLabel.Text);
         }
 
         private void OnResetFormClicked(object? sender, EventArgs e)
         {
             ResetForm();
-            StatusLabel.Text = "Formular zurÃ¼ckgesetzt.";
+            StatusLabel.Text = "Formular zur\u00fcckgesetzt.";
         }
 
         private async void OnClearHistoryClicked(object? sender, EventArgs e)
         {
             if (MoodEntries.Count == 0)
             {
-                StatusLabel.Text = "Es gibt noch keinen Verlauf zum LÃ¶schen.";
+                StatusLabel.Text = "Es gibt noch keinen Verlauf zum L\u00f6schen.";
                 return;
             }
 
             var shouldClear = await DisplayAlertAsync(
-                "Verlauf lÃ¶schen",
-                "MÃ¶chtest du alle bisherigen StimmungseintrÃ¤ge lÃ¶schen?",
-                "LÃ¶schen",
+                "Verlauf l\u00f6schen",
+                "M\u00f6chtest du alle bisherigen Stimmungseintr\u00e4ge l\u00f6schen?",
+                "L\u00f6schen",
                 "Abbrechen");
 
             if (!shouldClear)
@@ -95,7 +95,7 @@ namespace prototype1
             MoodEntries.Clear();
             Preferences.Remove(StorageKey);
             UpdateEntryCount();
-            StatusLabel.Text = "Verlauf gelÃ¶scht.";
+            StatusLabel.Text = "Verlauf gel\u00f6scht.";
         }
 
         private void ResetForm()
@@ -172,17 +172,16 @@ namespace prototype1
 
         public string MoodIcon => Mood switch
         {
-            "Gut" => "ðŸ˜Š",
-            "Neutral" => "ðŸ˜",
-            "Schlecht" => "ðŸ™",
-            _ => "â€¢"
+            "Gut" => "\U0001F60A",
+            "Neutral" => "\U0001F610",
+            "Schlecht" => "\U0001F641",
+            _ => "\u2022"
         };
 
-        public string CreatedAtText => $"{CreatedAt:dd.MM.yyyy HH:mm} Â· {Mood}";
+        public string CreatedAtText => $"{CreatedAt:dd.MM.yyyy HH:mm} \u00b7 {Mood}";
 
         public string NotePreview => string.IsNullOrWhiteSpace(Note)
             ? "Keine Notiz erfasst."
             : Note;
     }
 }
-
