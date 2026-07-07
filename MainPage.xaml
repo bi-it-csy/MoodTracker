@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="experiment1.MainPage"
+             Title="MoodTracker"
+             BackgroundColor="{AppThemeBinding Light=#F4F7F8, Dark=#15191C}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="22,24,22,32" Spacing="18">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12">
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <Label Text="MoodTracker"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}"
+                           SemanticProperties.HeadingLevel="Level1" />
+                    <Label Text="FerienPlausch Feedback"
+                           FontSize="15"
+                           TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
+                </VerticalStackLayout>
+
+                <Border Grid.Column="1"
+                        Padding="12,8"
+                        StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding Light=#E6F2EF, Dark=#213231}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Label Text="{Binding TodayText}"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1F6F61, Dark=#82D6C3}" />
+                </Border>
+            </Grid>
+
+            <Border Padding="18"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#20262A}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Wie war dein Veranstaltungstag?"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}" />
+                    <Label Text="Wähle ein Angebot, markiere deine Stimmung und schreibe optional eine kurze Notiz."
+                           FontSize="14"
+                           LineBreakMode="WordWrap"
+                           TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="18"
+                    StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#20262A}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="16">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Angebot"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#49626A, Dark=#C4D1D5}" />
+                        <Border Padding="10,0"
+                                Stroke="{AppThemeBinding Light=#D8E1E4, Dark=#3A464B}"
+                                StrokeThickness="1"
+                                BackgroundColor="{AppThemeBinding Light=#FAFCFC, Dark=#161B1E}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Picker x:Name="CoursePicker"
+                                    Title="Angebot auswählen">
+                                <Picker.Items>
+                                    <x:String>Sportkurs</x:String>
+                                    <x:String>Tanzkurs</x:String>
+                                    <x:String>Bastelkurs</x:String>
+                                    <x:String>Theaterworkshop</x:String>
+                                    <x:String>Naturtag</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Stimmung"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#49626A, Dark=#C4D1D5}" />
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                            <Button x:Name="GoodMoodButton"
+                                    Grid.Column="0"
+                                    Text="😊 Gut"
+                                    Clicked="OnMoodClicked"
+                                    CommandParameter="Gut" />
+                            <Button x:Name="NeutralMoodButton"
+                                    Grid.Column="1"
+                                    Text="😐 Neutral"
+                                    Clicked="OnMoodClicked"
+                                    CommandParameter="Neutral" />
+                            <Button x:Name="BadMoodButton"
+                                    Grid.Column="2"
+                                    Text="🙁 Schlecht"
+                                    Clicked="OnMoodClicked"
+                                    CommandParameter="Schlecht" />
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Notiz"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#49626A, Dark=#C4D1D5}" />
+                        <Border Padding="10,4"
+                                Stroke="{AppThemeBinding Light=#D8E1E4, Dark=#3A464B}"
+                                StrokeThickness="1"
+                                BackgroundColor="{AppThemeBinding Light=#FAFCFC, Dark=#161B1E}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Editor x:Name="NoteEditor"
+                                    Placeholder="Was war besonders gut oder schwierig?"
+                                    AutoSize="TextChanges"
+                                    HeightRequest="96"
+                                    MaxLength="220" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Button x:Name="SaveButton"
+                                Grid.Column="0"
+                                Text="Eintrag speichern"
+                                BackgroundColor="#1F6F78"
+                                TextColor="White"
+                                Clicked="OnSaveClicked" />
+                        <Button Grid.Column="1"
+                                Text="Zurücksetzen"
+                                BackgroundColor="{AppThemeBinding Light=#E8EEF0, Dark=#334047}"
+                                TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}"
+                                Clicked="OnResetFormClicked" />
+                    </Grid>
+
+                    <Label x:Name="StatusLabel"
+                           Text="Bereit für deinen ersten Eintrag."
+                           FontSize="13"
+                           TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" Margin="0,4,0,0">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="Bisherige Einträge"
+                           FontSize="21"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}" />
+                    <Label x:Name="EntryCountLabel"
+                           FontSize="13"
+                           TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
+                </VerticalStackLayout>
+
+                <Button Grid.Column="1"
+                        Text="Verlauf löschen"
+                        FontSize="13"
+                        BackgroundColor="{AppThemeBinding Light=#F5E8E5, Dark=#442C2A}"
+                        TextColor="{AppThemeBinding Light=#9B3F35, Dark=#F1B5AD}"
+                        Clicked="OnClearHistoryClicked" />
+            </Grid>
+
+            <CollectionView x:Name="MoodEntriesView"
+                            ItemsSource="{Binding MoodEntries}"
+                            SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Border Padding="18"
+                            StrokeThickness="0"
+                            BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#20262A}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Label Text="Noch keine Einträge vorhanden."
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{AppThemeBinding Light=#557079, Dark=#A8B8BE}" />
+                    </Border>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,10"
+                                Padding="16"
+                                StrokeThickness="0"
+                                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#20262A}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12">
+                                <Label Grid.RowSpan="3"
+                                       Text="{Binding MoodIcon}"
+                                       FontSize="34"
+                                       VerticalOptions="Start" />
+
+                                <Label Grid.Column="1"
+                                       Text="{Binding Course}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#15343B, Dark=#F4F7F8}" />
+                                <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text="{Binding CreatedAtText}"
+                                       FontSize="12"
+                                       TextColor="{AppThemeBinding Light=#6E838A, Dark=#9DAFB5}" />
+                                <Label Grid.Column="1"
+                                       Grid.Row="2"
+                                       Text="{Binding NotePreview}"
+                                       FontSize="14"
+                                       LineBreakMode="WordWrap"
+                                       TextColor="{AppThemeBinding Light=#334B52, Dark=#DCE6E9}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
