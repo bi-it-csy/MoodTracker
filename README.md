@@ -56,7 +56,7 @@ Ziel dieses Journals ist es, den aktuellen Projektstand, wichtige Entscheidungen
 - Fehlerhafte Umgebungsvariable `DOTNET_ROOT` als Ursache für den Windows-Startfehler identifiziert.
 - App erfolgreich über **Windows Machine** gestartet.
 
-![Hello World / Startzustand](https://placehold.co/600x400?text=Startzustand)
+![Hello World / Startzustand](images/start.png)
 
 ---
 
@@ -160,7 +160,7 @@ Ich habe mich für ein einseitiges Layout entschieden:
 - Datum, Stimmung, Angebot und Notiz
 - Button zum Löschen des Verlaufs
 
-![MoodTracker Layout](https://placehold.co/600x400?text=MoodTracker+Layout)
+![MoodTracker Layout](images/layout.png)
 
 ---
 
@@ -190,7 +190,7 @@ Folgende Felder werden validiert:
 - Projekt in GitHub hochgeladen.
 - Projektdateien auf `prototype1` umbenannt.
 
-![MoodTracker Formular](https://placehold.co/600x400?text=Formular+und+Verlauf)
+![MoodTracker Formular](images/verlauf.png)
 
 ---
 
@@ -229,9 +229,9 @@ Das Projekt folgt bewusst einer einfachen Struktur. Es wurde kein separates View
 
 | Datum | Feature | Screenshot |
 | --- | --- | --- |
-| 07.07.2026 | Startseite | ![](https://placehold.co/600x400?text=Startseite) |
-| 07.07.2026 | Eingabeformular | ![](https://placehold.co/600x400?text=Eingabeformular) |
-| 07.07.2026 | Verlauf | ![](https://placehold.co/600x400?text=Verlauf) |
+| 07.07.2026 | Startseite | ![](images/start.png) |
+| 07.07.2026 | Eingabeformular | ![](images/layout.png) |
+| 07.07.2026 | Verlauf | ![](images/verlauf.png) |
 
 ---
 
