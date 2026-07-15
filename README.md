@@ -9,7 +9,7 @@ Ziel dieses Journals ist es, den aktuellen Projektstand, wichtige Entscheidungen
 **Projektname:** MoodTracker  
 **Repository/Projekt:** prototype1  
 **Technologie:** C# mit .NET MAUI  
-**Zielplattform im Prototyp:** Windows Machine; Android ist im Projekt vorbereitet, das lokale Emulator-Deployment war jedoch durch die Schulungsumgebung blockiert.
+**Zielplattform im Prototyp:** Windows Machine und Android Emulator; Android wurde in Visual Studio erfolgreich gestartet.
 
 ---
 
@@ -43,6 +43,10 @@ Ziel dieses Journals ist es, den aktuellen Projektstand, wichtige Entscheidungen
 | Di, 07.07.2026 | Windows-Build erfolgreich getestet. Android-Build erfolgreich, Android-Deployment wegen lokaler Emulator-/JDK-Konfiguration blockiert. |
 | Di, 07.07.2026 | GitHub-Repository erstellt und Projekt hochgeladen. |
 | Di, 07.07.2026 | Projekt von `experiment1` auf `prototype1` umbenannt und Encoding-Fehler korrigiert. |
+| Di, 14.07.2026 | Android SDK/JDK-Konfiguration geprüft: gültige JDK-Installation und vorhandenes Android SDK identifiziert. |
+| Di, 14.07.2026 | Android Emulator `MoodTracker_API36` mit `avdmanager` ausserhalb des Visual-Studio Device Managers erstellt. |
+| Di, 14.07.2026 | App erfolgreich über Visual Studio auf dem Android Emulator gestartet. |
+| Di, 14.07.2026 | Android-Deployment-Fix `EmbedAssembliesIntoApk` in der Projektdatei ergänzt und Änderung nach GitHub gepusht. |
 
 ---
 
@@ -199,9 +203,11 @@ Folgende Felder werden validiert:
 **Was habe ich in Phase 4 umgesetzt und untersucht:**
 
 - Windows-Build erfolgreich geprüft.
-- Android-Build erfolgreich geprüft.
-- Android-Deployment untersucht.
-- Problem mit Java/JDK und Android Emulator dokumentiert.
+- Android-Build und Android-Deployment erfolgreich geprüft.
+- JDK- und Android-SDK-Pfade analysiert und korrekt zugeordnet.
+- Android Emulator `MoodTracker_API36` ausserhalb des Visual-Studio Device Managers erstellt, weil dieser Adminrechte verlangte.
+- Visual Studio konnte den bereits vorhandenen Emulator über `adb` erkennen und die App starten.
+- Fast-Deployment-Problem mit `EmbedAssembliesIntoApk` gelöst.
 - Encoding-Problem nach der Umbenennung erkannt und korrigiert.
 
 Das Projekt folgt bewusst einer einfachen Struktur. Es wurde kein separates ViewModel erstellt, weil die Aufgabenstellung eine vereinfachte Architektur erlaubt. Die View und die einfache Logik befinden sich gemeinsam in `MainPage.xaml` und `MainPage.xaml.cs`.
@@ -212,10 +218,11 @@ Das Projekt folgt bewusst einer einfachen Struktur. Es wurde kein separates View
 
 **Aktueller Stand:**
 
-- Prototyp ist über Windows lauffähig.
-- GitHub-Repository ist eingerichtet.
+- Prototyp ist über Windows und Android Emulator lauffähig.
+- GitHub-Repository ist eingerichtet und aktualisiert.
 - Kernfunktionen der User Stories sind umgesetzt.
-- Android ist im Projekt grundsätzlich vorbereitet, aber das Deployment ist auf dem lokalen Rechner durch fehlende bzw. falsch konfigurierte Android-Tools blockiert.
+- Android-Deployment wurde über Visual Studio erfolgreich getestet.
+- Der Emulator wurde einmalig ausserhalb des Visual-Studio Device Managers erstellt und danach von Visual Studio verwendet.
 
 **Nicht enthalten:**
 
@@ -237,12 +244,13 @@ Das Projekt folgt bewusst einer einfachen Struktur. Es wurde kein separates View
 
 ## ⚠️ Herausforderungen und Blockaden
 
-### Android Emulator und JDK
+### Android Emulator, JDK und Visual Studio
 
-- Problem: Visual Studio verwendete eine Java-8-JRE-Installation statt einer vollständigen JDK-Installation.
-- Folge: Android-Deployment konnte nicht korrekt ausgeführt werden.
-- Beobachtung: `adb` zeigte keine verbundenen Geräte.
-- Lösung/Entscheidung: Für den Prototyp wurde der funktionierende Windows-Start verwendet. Android bleibt als Zielplattform im Projekt enthalten.
+- Problem: Der Visual-Studio Android Device Manager verlangte Adminrechte. Zusätzlich wurde anfangs eine Java-8-JRE statt einer vollständigen JDK-Installation gefunden.
+- Analyse: Ein gültiges JDK lag unter `C:\Program Files\Android\openjdk\jdk-21.0.8`, das Android SDK unter `C:\Program Files (x86)\Android\android-sdk`.
+- Lösung: Das Emulator-Profil `MoodTracker_API36` wurde mit `avdmanager` ausserhalb des Visual-Studio Device Managers im Benutzerprofil erstellt.
+- Ergebnis: Der Emulator wurde über `adb` als `emulator-5554` erkannt und Visual Studio konnte die App über den grünen Start-Button auf dem Android Emulator starten.
+- Zusätzliche Anpassung: In `prototype1.csproj` wurde `EmbedAssembliesIntoApk` für `net10.0-android` gesetzt, damit das Deployment nicht am schnellen Assembly-Deployment scheitert.
 
 ### Visual Studio Runtime-Problem
 
@@ -259,6 +267,16 @@ Das Projekt folgt bewusst einer einfachen Struktur. Es wurde kein separates View
 ---
 
 ## 💻 Besonders erwähnenswerte Code-Beispiele
+
+### Android-Deployment-Fix für Visual Studio
+
+```xml
+<PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+  <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+</PropertyGroup>
+```
+
+Diese Einstellung deaktiviert das schnelle Assembly-Deployment für Android und packt die Assemblies direkt in die APK. Dadurch konnte die App zuverlässig aus Visual Studio auf dem Android Emulator gestartet werden.
 
 ### Speichern eines Stimmungseintrags
 
@@ -333,7 +351,6 @@ if (string.IsNullOrWhiteSpace(selectedMood))
 
 ## Reflexion
 
-Das Projekt war hilfreich, um den Ablauf einer kleinen MAUI-App zu verstehen. Besonders wichtig war die Erkenntnis, dass nicht jeder Fehler direkt im eigenen Code liegt. Ein grosser Teil der Arbeit bestand darin, Visual Studio, .NET, Android-Tools und GitHub korrekt einzuordnen.
+Das Projekt war hilfreich, um den Ablauf einer kleinen MAUI-App zu verstehen. Besonders wichtig war die Erkenntnis, dass nicht jeder Fehler direkt im eigenen Code liegt. Ein grosser Teil der Arbeit bestand darin, Visual Studio, .NET, Android-Tools und GitHub korrekt einzuordnen. Beim Android-Deployment zeigte sich ausserdem, dass Visual Studio und die Android-Werkzeuge getrennt betrachtet werden können: Der Emulator musste nicht zwingend über den Visual-Studio Device Manager erstellt werden, sondern konnte mit den offiziellen Android SDK Tools im Benutzerprofil angelegt und danach von Visual Studio verwendet werden.
 
 Der MoodTracker-Prototyp erfüllt die wichtigsten User Stories: Stimmung erfassen, Notiz speichern und bisherige Einträge anzeigen. Für eine spätere Weiterentwicklung wären eine echte API-Anbindung, Benutzerverwaltung und ein Administrationsbereich sinnvolle nächste Schritte.
-
